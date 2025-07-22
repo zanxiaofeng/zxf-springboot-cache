@@ -20,7 +20,8 @@ public class EmploymentRepository {
 
     public Employment update(Employment employment) {
         log.info("update: {}", employment);
-        return employmentMap.put(employment.employmentId(), employment);
+        employmentMap.put(employment.employmentId(), employment);
+        return employment;
     }
 
     public void deleteById(long employmentId) {

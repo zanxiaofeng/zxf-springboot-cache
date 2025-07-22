@@ -19,7 +19,7 @@ public class AddressController {
     }
 
     @PutMapping("/address")
-    public Address updateAddress(Address address) {
+    public Address updateAddress(@RequestBody Address address) {
         log.info("updateAddress: {}", address);
         return addressService.update(address);
     }

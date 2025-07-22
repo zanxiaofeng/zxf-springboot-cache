@@ -18,7 +18,8 @@ public class AddressRepository {
 
     public Address update(Address address) {
         log.info("update: {}", address);
-        return addressMap.put(address.addressId(), address);
+        addressMap.put(address.addressId(), address);
+        return address;
     }
 
     public void deleteById(long addressId) {
