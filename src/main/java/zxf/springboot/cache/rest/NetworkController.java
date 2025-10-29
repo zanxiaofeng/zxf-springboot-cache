@@ -16,7 +16,7 @@ import javax.net.ssl.SSLSocketFactory;
 @RestController
 @RequestMapping("/network")
 public class NetworkController {
-    @GetMapping("dns")
+    @GetMapping("/dns")
     public ResponseEntity<String> dns(@RequestParam String host) {
         try {
             InetAddress[] addresses = InetAddress.getAllByName(host);
@@ -27,7 +27,7 @@ public class NetworkController {
     }
 
 
-    @GetMapping("telnet")
+    @GetMapping("/telnet")
     public ResponseEntity<String> telnet(@RequestParam String host, @RequestParam int port) {
         try (Socket socket = new Socket()) {
             socket.connect(new InetSocketAddress(host, port), 30 * 1000);
@@ -38,7 +38,7 @@ public class NetworkController {
         }
     }
 
-    @GetMapping("ssl")
+    @GetMapping("/ssl")
     public ResponseEntity<String> ssl(@RequestParam String host, @RequestParam int port) {
         try {
             SSLSocketFactory factory = (SSLSocketFactory) SSLSocketFactory.getDefault();
