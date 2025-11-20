@@ -19,7 +19,7 @@ public class EmploymentService {
 
     @Cacheable()
     public Employment getById(long employmentId) {
-        log.info("getById: {}", employmentId);
+        log.info("getById: {}, {}", employmentId);
         return employmentRepository.getById(employmentId);
     }
 

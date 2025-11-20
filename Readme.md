@@ -8,6 +8,9 @@
 - org.springframework.cache.CacheManager
 - org.springframework.cache.caffeine.CaffeineCache
 - org.springframework.cache.caffeine.CaffeineCacheManager
+- org.springframework.cache.interceptor.KeyGenerator
+- org.springframework.cache.interceptor.SimpleKeyGenerator
+- org.springframework.cache.interceptor.SimpleKey
 
 # Caffeine Cache
 - com.github.benmanes.caffeine.cache.Caffeine

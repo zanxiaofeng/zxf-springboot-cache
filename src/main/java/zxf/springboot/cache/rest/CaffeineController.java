@@ -8,7 +8,7 @@ import org.springframework.cache.caffeine.CaffeineCache;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Set;
+import java.util.*;
 
 @RestController
 public class CaffeineController {
@@ -19,6 +19,14 @@ public class CaffeineController {
     @Qualifier("employmentsCacheManager")
     private CacheManager employmentsCacheManager;
 
+    @GetMapping("/caffeine/caches")
+    public List<String> caches() {
+        List<String> result = new ArrayList<>();
+        result.addAll(addressesCacheManager.getCacheNames());
+        result.addAll(employmentsCacheManager.getCacheNames());
+        return result;
+    }
+
     @GetMapping("/caffeine/addresses")
     public Set<Object> addressesCache() {
         CaffeineCache addressesCache = (CaffeineCache) addressesCacheManager.getCache("addresses");
@@ -28,7 +36,7 @@ public class CaffeineController {
 
     @GetMapping("/caffeine/employments")
     public Set<Object> employmentsCache() {
-        CaffeineCache employmentsCache = (CaffeineCache) addressesCacheManager.getCache("employments");
+        CaffeineCache employmentsCache = (CaffeineCache) employmentsCacheManager.getCache("employments");
         Cache cache = employmentsCache.getNativeCache();
         return cache.asMap().keySet();
     }
