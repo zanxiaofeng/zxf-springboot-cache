@@ -20,24 +20,32 @@ public class CaffeineController {
     private CacheManager employmentsCacheManager;
 
     @GetMapping("/caffeine/caches")
-    public List<String> caches() {
-        List<String> result = new ArrayList<>();
-        result.addAll(addressesCacheManager.getCacheNames());
-        result.addAll(employmentsCacheManager.getCacheNames());
+    public Map<String, Collection<String>> caches() {
+        Map<String, Collection<String>> result = new HashMap<>();
+        result.put("addresses", addressesCacheManager.getCacheNames());
+        result.put("employments", employmentsCacheManager.getCacheNames());
         return result;
     }
 
     @GetMapping("/caffeine/addresses")
-    public Set<Object> addressesCache() {
-        CaffeineCache addressesCache = (CaffeineCache) addressesCacheManager.getCache("addresses");
-        Cache cache = addressesCache.getNativeCache();
-        return cache.asMap().keySet();
+    public Map<String, Set<Object>> addressesCache() {
+        Map<String, Set<Object>> result = new HashMap<>();
+        for (String cacheName : addressesCacheManager.getCacheNames()) {
+            CaffeineCache addressesCache = (CaffeineCache) addressesCacheManager.getCache(cacheName);
+            Cache cache = addressesCache.getNativeCache();
+            result.put(cacheName, cache.asMap().keySet());
+        }
+        return result;
     }
 
     @GetMapping("/caffeine/employments")
-    public Set<Object> employmentsCache() {
-        CaffeineCache employmentsCache = (CaffeineCache) employmentsCacheManager.getCache("employments");
-        Cache cache = employmentsCache.getNativeCache();
-        return cache.asMap().keySet();
+    public Map<String, Set<Object>> employmentsCache() {
+        Map<String, Set<Object>> result = new HashMap<>();
+        for (String cacheName : employmentsCacheManager.getCacheNames()) {
+            CaffeineCache addressesCache = (CaffeineCache) employmentsCacheManager.getCache(cacheName);
+            Cache cache = addressesCache.getNativeCache();
+            result.put(cacheName, cache.asMap().keySet());
+        }
+        return result;
     }
 }

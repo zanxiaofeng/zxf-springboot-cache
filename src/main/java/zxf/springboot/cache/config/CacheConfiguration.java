@@ -11,8 +11,8 @@ import java.util.concurrent.TimeUnit;
 
 @Configuration
 public class CacheConfiguration {
-    @Bean
     @Primary
+    @Bean(name = "addressesCacheManager")
     public CacheManager addressesCacheManager() {
         var caffeine = Caffeine.newBuilder().expireAfterWrite(3, TimeUnit.MINUTES);
         CaffeineCacheManager caffeineCacheManager = new CaffeineCacheManager();
@@ -20,7 +20,7 @@ public class CacheConfiguration {
         return caffeineCacheManager;
     }
 
-    @Bean
+    @Bean(name = "employmentsCacheManager")
     public CacheManager employmentsCacheManager() {
         var caffeine = Caffeine.newBuilder().expireAfterAccess(5, TimeUnit.MINUTES);
         CaffeineCacheManager caffeineCacheManager = new CaffeineCacheManager();

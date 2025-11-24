@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 public class ReadonlyController {
-    @Cacheable
+    @Cacheable("default")
     @GetMapping("/readonly")
     public String readonly(@RequestParam long id, @RequestParam String name) {
         log.info("readonly: {}, {}", id, name);
