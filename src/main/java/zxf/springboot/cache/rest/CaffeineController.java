@@ -28,23 +28,25 @@ public class CaffeineController {
     }
 
     @GetMapping("/caffeine/addresses")
-    public Map<String, Set<Object>> addressesCache() {
-        Map<String, Set<Object>> result = new HashMap<>();
+    public Map<String, List<String>> addressesCache() {
+        Map<String, List<String>> result = new HashMap<>();
         for (String cacheName : addressesCacheManager.getCacheNames()) {
             CaffeineCache addressesCache = (CaffeineCache) addressesCacheManager.getCache(cacheName);
             Cache cache = addressesCache.getNativeCache();
-            result.put(cacheName, cache.asMap().keySet());
+            List<String> keys =  cache.asMap().keySet().stream().map(Object::toString).toList();
+            result.put(cacheName, keys);
         }
         return result;
     }
 
     @GetMapping("/caffeine/employments")
-    public Map<String, Set<Object>> employmentsCache() {
-        Map<String, Set<Object>> result = new HashMap<>();
+    public Map<String, List<String>> employmentsCache() {
+        Map<String, List<String>> result = new HashMap<>();
         for (String cacheName : employmentsCacheManager.getCacheNames()) {
             CaffeineCache addressesCache = (CaffeineCache) employmentsCacheManager.getCache(cacheName);
             Cache cache = addressesCache.getNativeCache();
-            result.put(cacheName, cache.asMap().keySet());
+            List<String> keys =  cache.asMap().keySet().stream().map(Object::toString).toList();
+            result.put(cacheName, keys);
         }
         return result;
     }
