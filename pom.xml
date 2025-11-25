@@ -12,6 +12,12 @@
     <groupId>com.zxf</groupId>
     <artifactId>zxf-springboot-cache</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>zxf-springboot-cache-default</module>
+        <module>zxf-springboot-cache-customize</module>
+    </modules>
 
     <properties>
         <java.version>17</java.version>
