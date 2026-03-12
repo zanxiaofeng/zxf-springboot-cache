@@ -14,7 +14,7 @@ public class CacheConfiguration {
     @Primary
     @Bean(name = "addressesCacheManager")
     public CacheManager addressesCacheManager() {
-        var caffeine = Caffeine.newBuilder().expireAfterWrite(3, TimeUnit.MINUTES);
+        Caffeine<Object, Object> caffeine = Caffeine.newBuilder().expireAfterWrite(3, TimeUnit.MINUTES);
         CaffeineCacheManager caffeineCacheManager = new CaffeineCacheManager();
         caffeineCacheManager.setCaffeine(caffeine);
         return caffeineCacheManager;
@@ -22,7 +22,7 @@ public class CacheConfiguration {
 
     @Bean(name = "employmentsCacheManager")
     public CacheManager employmentsCacheManager() {
-        var caffeine = Caffeine.newBuilder().expireAfterAccess(5, TimeUnit.MINUTES);
+        Caffeine<Object, Object> caffeine = Caffeine.newBuilder().expireAfterAccess(5, TimeUnit.MINUTES);
         CaffeineCacheManager caffeineCacheManager = new CaffeineCacheManager();
         caffeineCacheManager.setCaffeine(caffeine);
         return caffeineCacheManager;
